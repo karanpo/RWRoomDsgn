@@ -9,6 +9,10 @@ public class ResizeObject : MonoBehaviour {
     private GameObject lastSpawn = null;
     private float startSize;
     private float startX;
+    GameObject cubePrefab;
+
+    void Update()
+    {
 
     if (Input.GetMouseButtonDown (0))
     {
@@ -36,8 +40,8 @@ public class ResizeObject : MonoBehaviour {
 
     void Resize()
     {
-        temp = transform.localScale;
-        temp.y += Time.deltaTime;
+        tempY = transform.localScale;
+        tempY.y += Time.deltaTime;
         transform.localScale = tempY;
     }
 

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using VRTK;
 
-public class BuildWall : VRTK_InterctableObject {
-
+public class BuildWall  {
+/*
     public PrimitiveTypes shape;
     public bool resized = false;
 
@@ -28,5 +28,5 @@ public class BuildWall : VRTK_InterctableObject {
             menuObjectSpawner.StopUsing();
         }
     }
-
+    */
 }
