@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FernitureScript : MonoBehaviour {
+public class FurnitureScript : MonoBehaviour {
     public enum Type
     {
         chair,

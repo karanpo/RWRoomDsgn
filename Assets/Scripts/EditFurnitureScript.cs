@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 
-public class EditFernitureScript : VRTK_InteractableObject
+public class EditFurnitureScript : VRTK_InteractableObject
     {
     public GameObject EditMenu;
     bool menu = false;
@@ -14,7 +14,7 @@ public class EditFernitureScript : VRTK_InteractableObject
         Debug.Log("log trigger");
         menu = true;
         EditMenu.transform.Find("RadialMenuUI").gameObject.SetActive(true);
-        EditMenu.GetComponent<EditFernitureMenuScript>().furniture = gameObject;
+        EditMenu.GetComponent<EditFurnitureMenuScript>().furniture = gameObject;
         //EditMenu.transform.Find("RadialMenuUI").transform.Find("Panel").GetComponent<VRTK_RadialMenu>().ShowMenu();
 
     }
@@ -39,7 +39,7 @@ public class EditFernitureScript : VRTK_InteractableObject
 
         public void ChangeTexture()
         {
-            FernitureScript myscript = gameObject.GetComponentInChildren<FernitureScript>();
+            FurnitureScript myscript = gameObject.GetComponentInChildren<FurnitureScript>();
             myscript.ChangeTexture();
         }
     }

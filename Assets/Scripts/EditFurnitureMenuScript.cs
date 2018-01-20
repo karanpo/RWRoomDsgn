@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EditFernitureMenuScript : MonoBehaviour {
+public class EditFurnitureMenuScript : MonoBehaviour {
 
     public GameObject furniture { get; set; }
     public GameObject EditMenu;
@@ -23,7 +23,7 @@ public class EditFernitureMenuScript : MonoBehaviour {
 
     public void OnColorButton()
     {
-        furniture.GetComponent<EditFernitureScript>().ChangeTexture();
+        furniture.GetComponent<EditFurnitureScript>().ChangeTexture();
     }
 
     public void OnExitButton()
