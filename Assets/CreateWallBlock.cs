@@ -9,17 +9,21 @@ public class CreateWallBlock : MonoBehaviour {
 	BuilderManager builderManager = new BuilderManager();
 	GameObject Prefab;
 
+
 	GameObject GetObject(string Object){
 		switch (Object)	{
 			case "Door":
 				Prefab = objectsManager.Prefabs[0];
-				break;
+                Debug.Log(Prefab.name);
+                break;
 			case "Wall":
 				Prefab = objectsManager.Prefabs[1];
-				break;
+                Debug.Log(Prefab.name);
+                break;
 			case "Window":
 				Prefab = objectsManager.Prefabs[2];
-				break;
+                Debug.Log(Prefab.name);
+                break;
 			default:
 				Prefab = null;
 				break;
@@ -28,32 +32,37 @@ public class CreateWallBlock : MonoBehaviour {
 	}
 
 	void OnTriggerEnter () {
-		Prefab = GetObject(builderManager.getObjectName());
-		builderManager.setGameObject(Prefab);
+        //Prefab = GetObject(builderManager.getObjectName());
+        //builderManager.setGameObject(Prefab);
 
-		if (Prefab != null && builderManager.getObjectName() == "Wall") {
-			if (builderManager.getCorners() == 0) {
-				builderManager.setFirstCornerLocation(Spawnpoint.transform.localPosition);
+        //Debug.Log(Prefab.name);
+
+        //if (Prefab != null && builderManager.getObjectName() == "Wall") {
+		//	if (builderManager.getCorners() == 0) {
+        //        Debug.Log("IF");
+                builderManager.setFirstCornerLocation(Spawnpoint.transform.localPosition);
 				builderManager.setPrevLocation(Spawnpoint.transform.localPosition);
-				Instantiate(Prefab, Spawnpoint.position, Spawnpoint.rotation);
+                Instantiate(Resources.Load("Wall"), Spawnpoint.position, Spawnpoint.rotation);
+                Debug.Log("LOADED");
+        //       Instantiate(Prefab, Spawnpoint.position, Spawnpoint.rotation);
+        //
+        //	} else {
+        //        Debug.Log("ELSE");
+        //        Vector3 prevPos = builderManager.getPrevLocation();
+        //		Vector3 actPos = Spawnpoint.transform.localPosition;
+        //		Vector3 difference = actPos - prevPos;
 
-			} else {
-				Vector3 prevPos = builderManager.getPrevLocation();
-				Vector3 actPos = Spawnpoint.transform.localPosition;
-				Vector3 difference = actPos - prevPos;
-
-				if ((difference.x == 0 && difference.y != 0) || (difference.x != 0 && difference.y == 0)) {
-					Vector3 temp = Prefab.transform.localScale;
-					temp.x += difference.x;
-					temp.y += difference.y;
-					Prefab.transform.localScale = temp;
-					builderManager.setCorners(builderManager.getCorners() + 1);
-
-				}
-			}
-		}
-	}
-
-
+        //		if ((difference.x == 0 && difference.y != 0) || (difference.x != 0 && difference.y == 0)) {
+        //            Debug.Log("ELSE IF");
+        //            Vector3 temp = Prefab.transform.localScale;
+        //			temp.x += difference.x;
+        //			temp.y += difference.y;
+        //			Prefab.transform.localScale = temp;
+        //			builderManager.setCorners(builderManager.getCorners() + 1);
+        //
+        //		}
+        //	}
+        //}
+    }
 
 }

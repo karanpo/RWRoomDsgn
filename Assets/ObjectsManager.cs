@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectsManager : MonoBehaviour {
 
 	public GameObject[] Prefabs;
-
+    public GameObject leftControler;
+    public GameObject rightControler;
 
 }

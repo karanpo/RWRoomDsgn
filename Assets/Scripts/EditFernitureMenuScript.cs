@@ -8,7 +8,6 @@ public class EditFernitureMenuScript : MonoBehaviour {
     public GameObject EditMenu;
     public GameObject MoveMenu;
     public GameObject ScaleMenu;
-    public GameObject ColourMenu;
 
     public void OnMoveButton()
     {
@@ -31,9 +30,16 @@ public class EditFernitureMenuScript : MonoBehaviour {
     {
         MoveMenu.SetActive(false);
         ScaleMenu.SetActive(false);
-        ColourMenu.SetActive(false);
+        EditMenu.SetActive(false);
+        //gameObject.SetActive(false);
+    }
+
+    public void OnRetButton()
+    {
+        MoveMenu.SetActive(false);
+        ScaleMenu.SetActive(false);
         EditMenu.SetActive(true);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
 
