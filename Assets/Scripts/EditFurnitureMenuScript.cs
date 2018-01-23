@@ -8,6 +8,7 @@ public class EditFurnitureMenuScript : MonoBehaviour {
     public GameObject EditMenu;
     public GameObject MoveMenu;
     public GameObject ScaleMenu;
+    public float floorYpos = 0;
 
     public void OnMoveButton()
     {
@@ -54,7 +55,8 @@ public class EditFurnitureMenuScript : MonoBehaviour {
     {
         Vector3 tmp = furniture.transform.position;
         tmp.y += shift;
-        furniture.transform.position = tmp;
+        if (tmp.y > floorYpos)
+            furniture.transform.position = tmp;
     }
 
     public void MoveFernitureZ(int shift)
@@ -66,24 +68,34 @@ public class EditFurnitureMenuScript : MonoBehaviour {
 
     public void ScaleFernitureX(int scale)
     {
+        FurnitureScript myscript = furniture.GetComponentInChildren<FurnitureScript>();
+
         Vector3 tmp = furniture.transform.localScale;
         tmp.x += scale;
-        furniture.transform.localScale = tmp;
+        if (tmp.x < myscript.maxDepth && tmp.x > myscript.minDepth)
+            furniture.transform.localScale = tmp;
     }
     public void ScaleFernitureY(int scale)
     {
+        FurnitureScript myscript = furniture.GetComponentInChildren<FurnitureScript>();
+
         Vector3 tmp = furniture.transform.localScale;
         tmp.y += scale;
-        furniture.transform.localScale = tmp;
+
+        if (tmp.y < myscript.maxWidth && tmp.y > myscript.minWidth)
+            furniture.transform.localScale = tmp;
     }
     public void ScaleFernitureZ(int scale)
     {
+        FurnitureScript myscript = furniture.GetComponentInChildren<FurnitureScript>();
+
         Vector3 tmp = furniture.transform.localScale;
         tmp.z += scale;
-        furniture.transform.localScale = tmp;
-        Vector3 tmp1 = furniture.transform.position;
-        tmp.y += 0.5f;
-        furniture.transform.position = tmp1;
+        
+        if (tmp.z < myscript.maxHeight && tmp.z > myscript.minHeight)
+        {
+            furniture.transform.localScale = tmp;
+        }
     }
 
 
