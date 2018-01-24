@@ -19,7 +19,7 @@ public class FurnitureScript : MonoBehaviour {
     public float minDepth { get; set; }
     
 
-    int currentTexIndex = 0;
+    public int currentTexIndex = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -76,6 +76,23 @@ public class FurnitureScript : MonoBehaviour {
             setMaterial(transform, materials[currentTexIndex]);
         }
         
+    }
+
+    public void SetTexture()
+    {
+        
+        
+        if (fType == Type.chair)
+        {
+            Transform seat = transform.Find("seat");
+            seat.GetComponent<Renderer>().material = materials[currentTexIndex];
+
+        }
+        else
+        {
+            setMaterial(transform, materials[currentTexIndex]);
+        }
+
     }
 
     public void setMaterial(Transform t, Material mat)

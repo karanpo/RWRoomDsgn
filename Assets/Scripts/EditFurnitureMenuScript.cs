@@ -8,7 +8,18 @@ public class EditFurnitureMenuScript : MonoBehaviour {
     public GameObject EditMenu;
     public GameObject MoveMenu;
     public GameObject ScaleMenu;
+    public GameObject RotateMenu;
     public float floorYpos = 0;
+
+    public void MenuOn()
+    {
+        EditMenu.SetActive(true);
+    }
+
+    public void MenuOff()
+    {
+        EditMenu.SetActive(false);
+    }
 
     public void OnMoveButton()
     {
@@ -22,6 +33,12 @@ public class EditFurnitureMenuScript : MonoBehaviour {
         ScaleMenu.SetActive(true);
     }
 
+    public void OnRotButton()
+    {
+        EditMenu.SetActive(false);
+        RotateMenu.SetActive(true);
+    }
+
     public void OnColorButton()
     {
         furniture.GetComponent<EditFurnitureScript>().ChangeTexture();
@@ -32,6 +49,7 @@ public class EditFurnitureMenuScript : MonoBehaviour {
         MoveMenu.SetActive(false);
         ScaleMenu.SetActive(false);
         EditMenu.SetActive(false);
+        RotateMenu.SetActive(false);
         //gameObject.SetActive(false);
     }
 
@@ -39,19 +57,20 @@ public class EditFurnitureMenuScript : MonoBehaviour {
     {
         MoveMenu.SetActive(false);
         ScaleMenu.SetActive(false);
+        RotateMenu.SetActive(false);
         EditMenu.SetActive(true);
         //gameObject.SetActive(false);
     }
 
 
-    public void MoveFernitureX(int shift)
+    public void MoveFernitureX(float shift)
     {
         Vector3 tmp = furniture.transform.position;
         tmp.x += shift;
         furniture.transform.position = tmp;
     }
 
-    public void MoveFernitureY(int shift)
+    public void MoveFernitureY(float shift)
     {
         Vector3 tmp = furniture.transform.position;
         tmp.y += shift;
@@ -59,14 +78,14 @@ public class EditFurnitureMenuScript : MonoBehaviour {
             furniture.transform.position = tmp;
     }
 
-    public void MoveFernitureZ(int shift)
+    public void MoveFernitureZ(float shift)
     {
         Vector3 tmp = furniture.transform.position;
         tmp.z += shift;
         furniture.transform.position = tmp;
     }
 
-    public void ScaleFernitureX(int scale)
+    public void ScaleFernitureX(float scale)
     {
         FurnitureScript myscript = furniture.GetComponentInChildren<FurnitureScript>();
 
@@ -75,7 +94,7 @@ public class EditFurnitureMenuScript : MonoBehaviour {
         if (tmp.x < myscript.maxDepth && tmp.x > myscript.minDepth)
             furniture.transform.localScale = tmp;
     }
-    public void ScaleFernitureY(int scale)
+    public void ScaleFernitureY(float scale)
     {
         FurnitureScript myscript = furniture.GetComponentInChildren<FurnitureScript>();
 
@@ -85,7 +104,7 @@ public class EditFurnitureMenuScript : MonoBehaviour {
         if (tmp.y < myscript.maxWidth && tmp.y > myscript.minWidth)
             furniture.transform.localScale = tmp;
     }
-    public void ScaleFernitureZ(int scale)
+    public void ScaleFernitureZ(float scale)
     {
         FurnitureScript myscript = furniture.GetComponentInChildren<FurnitureScript>();
 
@@ -96,6 +115,17 @@ public class EditFurnitureMenuScript : MonoBehaviour {
         {
             furniture.transform.localScale = tmp;
         }
+    }
+
+    public void RotFernitureY(float scale)
+    {
+        
+        furniture.transform.Rotate(0, scale, 0);
+        
+    }
+    public void RotFernitureZ(float scale)
+    {
+        furniture.transform.Rotate(0, 0, scale);
     }
 
 

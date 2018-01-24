@@ -9,21 +9,33 @@ public class EditFurnitureScript : VRTK_InteractableObject
     bool menu = false;
         public override void StartUsing(VRTK_InteractUse usingObject)
         {
-        Debug.Log("log trigger1");
-        base.StartUsing(usingObject);
-        Debug.Log("log trigger");
-        menu = true;
-        EditMenu.transform.Find("RadialMenuUI").gameObject.SetActive(true);
-        EditMenu.GetComponent<EditFurnitureMenuScript>().furniture = gameObject;
-        //EditMenu.transform.Find("RadialMenuUI").transform.Find("Panel").GetComponent<VRTK_RadialMenu>().ShowMenu();
+            Debug.Log("log trigger1");
+            base.StartUsing(usingObject);
+            Debug.Log("log trigger");
+            menu = true;
+            //if (gameObject.GetComponent<Renderer>())
+            //{
+             //   FurnitureScript myscript = gameObject.GetComponentInChildren<FurnitureScript>();
+            //    myscript.SetTexture();
+            //    gameObject.GetComponent<Renderer>().material = myscript.materials[myscript.currentTexIndex];
+            //}
+        
+            EditMenu = GameObject.FindGameObjectWithTag("EditMenu");
+            EditMenu.GetComponent<EditFurnitureMenuScript>().MenuOn();
+            EditMenu.GetComponent<EditFurnitureMenuScript>().furniture = gameObject;
+            //EditMenu.transform.Find("RadialMenuUI").transform.Find("Panel").GetComponent<VRTK_RadialMenu>().ShowMenu();
 
     }
 
         public override void StopUsing(VRTK_InteractUse usingObject)
         {
             base.StopUsing(usingObject);
-        menu = false;
-        EditMenu.transform.Find("RadialMenuUI").gameObject.SetActive(false);
+            FurnitureScript myscript = gameObject.GetComponentInChildren<FurnitureScript>();
+            myscript.SetTexture();
+            gameObject.GetComponent<Renderer>().material = myscript.materials[myscript.currentTexIndex];
+            menu = false;
+            EditMenu.GetComponent<EditFurnitureMenuScript>().OnExitButton();
+            //EditMenu.transform.Find("RadialMenuUI").gameObject.SetActive(false);
     }
 
         protected void Start()
