@@ -10,31 +10,46 @@ public class EditFurnitureMenuScript : MonoBehaviour {
     public GameObject ScaleMenu;
     public GameObject RotateMenu;
     public float floorYpos = 0;
+    public float MoveForce = 2;
+    private float scaleFactor = 0.25f;
 
     public void MenuOn()
     {
         EditMenu.SetActive(true);
+        MoveMenu.SetActive(false);
+        ScaleMenu.SetActive(false);
+        RotateMenu.SetActive(false);
     }
 
     public void MenuOff()
     {
         EditMenu.SetActive(false);
+        MoveMenu.SetActive(false);
+        ScaleMenu.SetActive(false);
+        RotateMenu.SetActive(false);
     }
 
     public void OnMoveButton()
     {
+        ScaleMenu.SetActive(false);
+        RotateMenu.SetActive(false);
         EditMenu.SetActive(false);
         MoveMenu.SetActive(true);
     }
 
     public void OnResizeButton()
     {
+
+        MoveMenu.SetActive(false);
+        RotateMenu.SetActive(false);
         EditMenu.SetActive(false);
         ScaleMenu.SetActive(true);
     }
 
     public void OnRotButton()
     {
+        MoveMenu.SetActive(false);
+        ScaleMenu.SetActive(false);
         EditMenu.SetActive(false);
         RotateMenu.SetActive(true);
     }
@@ -62,27 +77,35 @@ public class EditFurnitureMenuScript : MonoBehaviour {
         //gameObject.SetActive(false);
     }
 
+    public void OnDelete()
+    {
+        Delete();
+        OnExitButton();
+    }
+    
+    public void Delete()
+    {
+        if (furniture != null)
+        {
+            Destroy(furniture);
+        }
+    }
 
     public void MoveFernitureX(float shift)
     {
-        Vector3 tmp = furniture.transform.position;
-        tmp.x += shift;
-        furniture.transform.position = tmp;
+        furniture.GetComponent<Rigidbody>().AddForce(shift * MoveForce, 0, 0, ForceMode.Impulse);
     }
 
     public void MoveFernitureY(float shift)
     {
-        Vector3 tmp = furniture.transform.position;
-        tmp.y += shift;
-        if (tmp.y > floorYpos)
-            furniture.transform.position = tmp;
+
+        furniture.GetComponent<Rigidbody>().AddForce(0, shift * MoveForce, 0, ForceMode.Impulse);
     }
 
     public void MoveFernitureZ(float shift)
     {
-        Vector3 tmp = furniture.transform.position;
-        tmp.z += shift;
-        furniture.transform.position = tmp;
+
+        furniture.GetComponent<Rigidbody>().AddForce(0, 0, shift * MoveForce, ForceMode.Impulse);
     }
 
     public void ScaleFernitureX(float scale)
@@ -90,7 +113,7 @@ public class EditFurnitureMenuScript : MonoBehaviour {
         FurnitureScript myscript = furniture.GetComponentInChildren<FurnitureScript>();
 
         Vector3 tmp = furniture.transform.localScale;
-        tmp.x += scale;
+        tmp.x += scale * scaleFactor;
         if (tmp.x < myscript.maxDepth && tmp.x > myscript.minDepth)
             furniture.transform.localScale = tmp;
     }
@@ -99,20 +122,24 @@ public class EditFurnitureMenuScript : MonoBehaviour {
         FurnitureScript myscript = furniture.GetComponentInChildren<FurnitureScript>();
 
         Vector3 tmp = furniture.transform.localScale;
-        tmp.y += scale;
+        tmp.y += scale * scaleFactor;
 
         if (tmp.y < myscript.maxWidth && tmp.y > myscript.minWidth)
+        {
             furniture.transform.localScale = tmp;
+        }
+
     }
     public void ScaleFernitureZ(float scale)
     {
         FurnitureScript myscript = furniture.GetComponentInChildren<FurnitureScript>();
 
         Vector3 tmp = furniture.transform.localScale;
-        tmp.z += scale;
+        tmp.z += scale * scaleFactor;
         
         if (tmp.z < myscript.maxHeight && tmp.z > myscript.minHeight)
         {
+            furniture.transform.Translate(0, 0.1f, 0, Space.World);
             furniture.transform.localScale = tmp;
         }
     }

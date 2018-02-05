@@ -16,12 +16,19 @@ public class SelectPoint : MonoBehaviour {
 	 public GameObject parent;
 	 private float x = 5;
 	 private float y = 5;
-    private float offset = 145.0f;
+     private float offset = 145.0f;
+    //private Vector3 cameraPosition = new Vector3(0.0f, 0.0f, 0.0f);
+    //private Vector3 cameraRotation = new Vector3(0.0f, 180.0f, 0.0f);
 
-     void Update()
+
+    void Update()
      {
 		 if(Input.GetMouseButtonDown(0)){
-			 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            //Camera.main.transform.localPosition = cameraPosition;
+            //Camera.main.transform.localRotation = Quaternion.Euler(cameraRotation);
+
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			 if(Physics.Raycast(ray, out hit))
 			 {
                 firstCorner = builderManager.getFirstCornerLocation();
